@@ -9,10 +9,12 @@ Uses some smarts to avoid opening and re-saving images that aren't shrunk, so ti
       - name: Shrink images
         id: shrink-images
         uses: TheGroundZero/image-shrinker
+        with:
+          subdir: img  # Relative path starting from / in repo, default = ""
+          maxwidth: 1920 # Default
+          maxheight: 1080 # Default
         env:
-          SUB_DIR: img  # Relative path starting from / in repo, default = ""
-          MAXWIDTH: 1920 # Default
-          MAXHEIGHT: 1080 # Default
+          DEBUG: false # Default
 ```
 
 This can be accompanied by steps committing the changes to the repo so images don't need to be resized after every run
@@ -42,5 +44,5 @@ This can be accompanied by steps committing the changes to the repo so images do
 git clone https://github.com/TheGroundZero/image-shrinker
 cd image-shrinker
 docker build --rm --tag "image-shrinker" --build-arg BUILD_DATE="$(date)" --build-arg BUILD_REVISION=0.1 .
-docker run -it --rm -v [image folder]:/github/workspace -e MAXWIDTH=1920 -e MAXHEIGHT=1080 -e DEBUG=true image-shrinker
+docker run -it --rm -v [image folder]:/github/workspace -e INPUT_MAXWIDTH=1920 -e INPUT_MAXHEIGHT=1080 -e DEBUG=true image-shrinker
 ```

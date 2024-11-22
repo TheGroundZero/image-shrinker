@@ -5,22 +5,18 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
 inputs:
-  SUB_DIR:
+  subdir:
     description: Relative path starting from / in repo
     required: false
     default: ""
-  MAXWIDTH:
+  maxwidth:
     description: Maximum width of the image
     required: false
     default: "1920"
-  MAXHEIGHT:
+  maxheight:
     description: Maximum height of the image
     required: false
     default: "1080"
-  DEBUG:
-    description: Enable debug logging
-    required: false
-    default: "false"
 branding:
   icon: 'crop'
   color: 'orange'
