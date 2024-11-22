@@ -1,0 +1,9 @@
+name: 'Image Shrinker'
+description: 'Recursively shrink images to a given maximum width/height while maintaining aspect ratio.'
+author: 'TheGroundZero'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'crop'
+  color: 'orange'

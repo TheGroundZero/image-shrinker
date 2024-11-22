@@ -1,6 +1,6 @@
 # image-shrinker
 
-GitHub action that uses Imagemagick to recursively shrink images to a given maximum width/height while maintaining aspect ratio.
+GitHub action that uses Imagemagick and Gifsicle to recursively shrink images to a given maximum width/height while maintaining aspect ratio.
 Uses some smarts to avoid opening and re-saving images that aren't shrunk, so timestamps aren't impacted.
 
 ## Use in GitHub Action
