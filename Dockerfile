@@ -22,7 +22,7 @@ LABEL org.opencontainers.image.licenses="GPL-3.0"
 LABEL org.opencontainers.image.created=${BUILD_DATE}
 LABEL org.opencontainers.image.revision=${BUILD_REVISION}
 
-RUN apk add --no-cache file rsvg-convert imagemagick
+RUN apk add --no-cache file rsvg-convert imagemagick gifsicle
 
 COPY --chmod=755 src/shrinkImages.sh /usr/src/
 
