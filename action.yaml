@@ -4,6 +4,23 @@ author: 'TheGroundZero'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+inputs:
+  SUB_DIR:
+    description: Relative path starting from / in repo
+    required: false
+    default: ""
+  MAXWIDTH:
+    description: Maximum width of the image
+    required: false
+    default: "1920"
+  MAXHEIGHT:
+    description: Maximum height of the image
+    required: false
+    default: "1080"
+  DEBUG:
+    description: Enable debug logging
+    required: false
+    default: "false"
 branding:
   icon: 'crop'
   color: 'orange'

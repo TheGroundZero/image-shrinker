@@ -10,9 +10,9 @@ Uses some smarts to avoid opening and re-saving images that aren't shrunk, so ti
         id: shrink-images
         uses: TheGroundZero/image-shrinker
         env:
-          SUB_DIR: img  # Relative path starting from / in repo
-          MAXWIDTH: 1920
-          MAXHEIGHT: 1080
+          SUB_DIR: img  # Relative path starting from / in repo, default = ""
+          MAXWIDTH: 1920 # Default
+          MAXHEIGHT: 1080 # Default
 ```
 
 This can be accompanied by steps committing the changes to the repo so images don't need to be resized after every run
