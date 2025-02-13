@@ -3,6 +3,7 @@
 DIR="$1"
 MAXW=$2
 MAXH=$3
+IMG="$4"
 
 if [ $DEBUG = true ]; then
     echo "[#] Currently located in $(pwd)"
@@ -10,32 +11,44 @@ if [ $DEBUG = true ]; then
     echo "[#] Max image size (w x h): ${MAXW}x${MAXH}"
 fi
 
-find "$DIR" -type f | while read img; do
-    mime=$(printf '%s\n' $(file --mime-type "$img"))
+resize_img()
+{
+    IMG=$1
+    if [ $DEBUG = true ]; then echo "[#] Checking ${IMG}"; fi
+
+    mime=$(printf '%s\n' $(file --mime-type "$IMG"))
     if echo $mime | grep -Fqe "image"; then
         if echo $mime | grep -Fqe "gif"; then
-            dimensions=$(gifsicle --no-logical-screen -I "$img")
+            dimensions=$(gifsicle --no-logical-screen -I "$IMG")
             imageWidth=$(echo $dimensions | awk '/logical screen/ {split($3,a,x); print a[1]}')
             imageHeight=$(echo $dimensions | awk '/logical screen/ {split($3,a,x); print a[2]}')
 
             if [ "$imageWidth" -gt "$MAXW" ] || [ "$imageHeight" -gt "$MAXH" ]; then
-                gifsicle --no-logical-screen --resize-fit "${MAXW}x${MAXH}" "$img"
-                if [ $DEBUG = true ]; then echo "[+] Resized $img (${imageWidth}x${imageHeight})"; fi
+                gifsicle --no-logical-screen --resize-fit "${MAXW}x${MAXH}" "$IMG"
+                if [ $DEBUG = true ]; then echo "[+] Resized ${IMG} (${imageWidth}x${imageHeight})"; fi
             else
-                if [ $DEBUG = true ]; then echo "[-] Skipping $img (${imageWidth}x${imageHeight})"; fi
+                if [ $DEBUG = true ]; then echo "[-] Skipping ${IMG} (${imageWidth}x${imageHeight})"; fi
             fi
         else
-            imageWidth=$(identify -format "%w" "$img")
-            imageHeight=$(identify -format "%h" "$img")
+            imageWidth=$(identify -format "%w" "$IMG")
+            imageHeight=$(identify -format "%h" "$IMG")
 
             if [ "$imageWidth" -gt "$MAXW" ] || [ "$imageHeight" -gt "$MAXH" ]; then
-                mogrify -resize "${MAXW}x${MAXH}>" "$img"
-                if [ $DEBUG = true ]; then echo "[+] Resized $img (${imageWidth}x${imageHeight})"; fi
+                mogrify -resize "${MAXW}x${MAXH}>" "$IMG"
+                if [ $DEBUG = true ]; then echo "[+] Resized ${IMG} (${imageWidth}x${imageHeight})"; fi
             else
-                if [ $DEBUG = true ]; then echo "[-] Skipping $img (${imageWidth}x${imageHeight})"; fi
+                if [ $DEBUG = true ]; then echo "[-] Skipping ${IMG} (${imageWidth}x${imageHeight})"; fi
             fi
         fi
     else
-        if [ $DEBUG = true ]; then echo "[/] Not an image - ${img}"; fi
+        if [ $DEBUG = true ]; then echo "[/] Not an image - ${IMG}"; fi
     fi
-done
+}
+
+if [ -z $IMG ]; then
+    find "$DIR" -type f | while read img; do
+        resize_img $img
+    done
+else
+    resize_img "$DIR/$IMG"
+fi

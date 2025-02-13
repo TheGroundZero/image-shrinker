@@ -17,6 +17,10 @@ inputs:
     description: Maximum height of the image
     required: false
     default: "1080"
+  image:
+    description: Specify single image in subdir
+    required: false
+    default: ""
 branding:
   icon: 'crop'
   color: 'orange'

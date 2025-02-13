@@ -9,6 +9,7 @@ ARG SOURCE_DIR="/github/workspace"
 ENV INPUT_SUBDIR=""
 ENV INPUT_MAXWIDTH=1920
 ENV INPUT_MAXHEIGHT=1080
+ENV INPUT_IMAGE=""
 ENV DEBUG=false
 
 LABEL org.opencontainers.image.title="TheGroundZero/image-shrinker"
@@ -28,4 +29,4 @@ COPY --chmod=755 src/shrinkImages.sh /usr/src/
 
 WORKDIR ${SOURCE_DIR}
 
-ENTRYPOINT /usr/src/shrinkImages.sh "./${INPUT_SUBDIR}" ${INPUT_MAXWIDTH} ${INPUT_MAXHEIGHT}
+ENTRYPOINT /usr/src/shrinkImages.sh "./${INPUT_SUBDIR}" ${INPUT_MAXWIDTH} ${INPUT_MAXHEIGHT} "${INPUT_IMAGE}"

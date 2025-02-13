@@ -6,11 +6,22 @@ Uses some smarts to avoid opening and re-saving images that aren't shrunk, so ti
 ## Use in GitHub Action
 
 ```yaml
-      - name: Shrink images
+      - name: Shrink images in folder
         id: shrink-images
         uses: TheGroundZero/image-shrinker
         with:
           subdir: img  # Relative path starting from / in repo, default = ""
+          maxwidth: 1920 # Default
+          maxheight: 1080 # Default
+        env:
+          DEBUG: false # Default
+      
+      - name: Shrink single image in folder
+        id: shrink-images
+        uses: TheGroundZero/image-shrinker
+        with:
+          subdir: img  # Relative path starting from / in repo, default = ""
+          image: image.jpg # image inside subdir
           maxwidth: 1920 # Default
           maxheight: 1080 # Default
         env:
