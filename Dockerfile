@@ -13,7 +13,7 @@ ENV INPUT_IMAGE=""
 ENV DEBUG=false
 
 LABEL org.opencontainers.image.title="TheGroundZero/image-shrinker"
-LABEL org.opencontainers.image.description="GitHub action to shrink images to a maximum widthxheight maintaining aspect ratio "
+LABEL org.opencontainers.image.description="GitHub action to shrink images to a maximum widthxheight maintaining aspect ratio"
 LABEL org.opencontainers.image.authors="2406013+TheGroundZero@users.noreply.github.com"
 LABEL org.opencontainers.image.vendor="TheGroundZero"
 LABEL org.opencontainers.image.url="https://github.com/TheGroundZero/image-shrinker"
